@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的第一个网页</title>
+    <style>
+        /* 简单样式 - 让文字居中并添加动画 */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #2c3e50;
+            animation: fadeIn 2s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello World! 👋</h1>
+
+    <script>
+        // 控制台输出（按F12查看）
+        console.log("页面已加载！");
+        
+        // 点击文字交互
+        document.querySelector('h1').addEventListener('click', () => {
+            alert('你好，世界！');
+        });
+    </script>
+</body>
+</html>
