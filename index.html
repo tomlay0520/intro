@@ -3,39 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的第一个网页</title>
+    <title>汤磊的个人简介 | Lei Tang's Profile</title>
     <style>
-        /* 简单样式 - 让文字居中并添加动画 */
         body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .language-selector {
+            text-align: right;
+            margin-bottom: 10px;
+        }
+        .language-btn {
+            background: none;
+            border: none;
+            color: #3498db;
+            cursor: pointer;
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+        .language-btn.active {
+            font-weight: bold;
+            border-bottom: 2px solid #3498db;
+        }
+        .profile-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-top: 10px;
+        }
+        .header {
             display: flex;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
         }
-        h1 {
+        .photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #f0f0f0;
+            margin-right: 30px;
+        }
+        .name {
+            font-size: 32px;
+            font-weight: bold;
             color: #2c3e50;
-            animation: fadeIn 2s;
+            margin-bottom: 5px;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .education {
+            font-size: 18px;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+        .section {
+            margin-bottom: 25px;
+        }
+        .section-title {
+            font-size: 22px;
+            color: #3498db;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        .interest-item, .award-item, .project-item {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .interest-item:before, .award-item:before, .project-item:before {
+            content: "•";
+            color: #3498db;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .highlight {
+            background-color: #f8f4e5;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #95a5a6;
+            font-size: 14px;
+        }
+        .english-version {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <h1>Hello World! 👋</h1>
+    <div class="language-selector">
+        <button class="language-btn active" onclick="showChinese()">中文</button>
+        <button class="language-btn" onclick="showEnglish()">English</button>
+    </div>
+
+    <div id="chinese-version" class="profile-container">
+        <div class="header">
+            <img src="lei.jpg" alt="汤磊" class="photo">
+            <div>
+                <div class="name">汤磊</div>
+                <div class="education">上海电力大学 计算机科学与技术学院 2022级软件工程系</div>
+                <div class="education">数学系辅修 | 电子信息工程系辅修</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">学术兴趣</div>
+            <div class="interest-item">计算机系统领域，特别是<span class="highlight">嵌入式系统开发</span>、<span class="highlight">软件可靠性工程</span>和<span class="highlight">形式化验证</span></div>
+            <div class="interest-item">跨学科研究，结合计算机科学与数学、电子工程的多领域知识</div>
+        </div>
+
+<!--         <div class="section">
+            <div class="section-title">获奖经历</div>
+            <div class="award-item">全国大学生数学竞赛 <span class="highlight">二等奖</span>（前5%）</div>
+            <div class="award-item">挑战杯大学生创新大赛<span class="highlight"></span>（全国前20%）</div>
+        </div> -->
+
+        <div class="section">
+            <div class="section-title">项目经验</div>
+            <div class="project-item">自研指令集框架Lei Arch<span class="highlight">模拟器实现</span></div>
+            <div class="project-item">参与2025年全国大学生系统能力大赛<span class="highlight">技术支持</span></div>
+            <div class="project-item">为我校经济与管理学院开发微信小程序<span class="highlight">"挡雨"</span>，从需求分析到部署上线的完整开发流程</div>
+            <div class="project-item">从零开始设计开发基于<span class="highlight">RISC-V架构</span>的操作系统，实现核心功能模块</div>
+            <div class="project-item">为麻省理工学院的<span class="highlight">XV6系统</span>的boot设计<span class="highlight">容错机制</span>，提高系统可靠性</div>
+        </div>
+
+        <div class="footer">
+            "求知若饥，虚心若愚" —— 持续探索计算机系统的无限可能
+        </div>
+    </div>
+
+    <div id="english-version" class="profile-container english-version">
+        <div class="header">
+            <img src="lei.jpg" alt="Tang Lei" class="photo">
+            <div>
+                <div class="name">Lei Tang</div>
+                <div class="education">Shanghai University of Electric Power, School of Computer Science and Technology</div>
+                <div class="education">Class of 2022, Software Engineering Major</div>
+                <div class="education">Minor in Mathematics | Minor in Electronic Information Engineering</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Research Interests</div>
+            <div class="interest-item">Computer systems, particularly in <span class="highlight">embedded systems development</span>, <span class="highlight">software reliability engineering</span>, and <span class="highlight">formal verification</span></div>
+            <div class="interest-item">Interdisciplinary research combining computer science with mathematics and electronic engineering</div>
+        </div>
+
+<!--         <div class="section">
+            <div class="section-title">Awards</div>
+            <div class="award-item">National College Mathematics Competition <span class="highlight">Second Prize</span> (Top 5%)</div>
+            <div class="award-item">National College System Capability Competition <span class="highlight">Excellence Award</span> (Top 20% nationwide)</div>
+        </div> -->
+
+<div class="section">
+    <div class="section-title">Project Experience</div>
+    <div class="project-item">Implemented <span class="highlight">simulator</span> for self-designed instruction set architecture <span class="highlight">Lei Arch</span></div>
+    <div class="project-item">Provided <span class="highlight">technical support</span> for 2025 National College System Capability Competition</div>
+    <div class="project-item">Developed WeChat mini-program <span class="highlight">"Rain Shield"</span> for School of Economics and Management, covering full development cycle from requirements analysis to deployment</div>
+    <div class="project-item">Designed and implemented a <span class="highlight">RISC-V-based</span> operating system from scratch with core functional modules</div>
+    <div class="project-item">Designed <span class="highlight">fault-tolerant mechanism</span> for boot process of MIT's <span class="highlight">XV6 system</span>, enhancing system reliability</div>
+</div>
+
+        <div class="footer">
+            "Stay hungry, stay foolish" — Continuously exploring the possibilities of computer systems
+        </div>
+    </div>
 
     <script>
-        // 控制台输出（按F12查看）
-        console.log("页面已加载！");
+        function showChinese() {
+            document.getElementById('chinese-version').style.display = 'block';
+            document.getElementById('english-version').style.display = 'none';
+            document.querySelectorAll('.language-btn')[0].classList.add('active');
+            document.querySelectorAll('.language-btn')[1].classList.remove('active');
+        }
         
-        // 点击文字交互
-        document.querySelector('h1').addEventListener('click', () => {
-            alert('你好，世界！');
-        });
+        function showEnglish() {
+            document.getElementById('chinese-version').style.display = 'none';
+            document.getElementById('english-version').style.display = 'block';
+            document.querySelectorAll('.language-btn')[0].classList.remove('active');
+            document.querySelectorAll('.language-btn')[1].classList.add('active');
+        }
     </script>
 </body>
 </html>
