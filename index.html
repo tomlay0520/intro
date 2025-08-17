@@ -4,101 +4,341 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>汤磊的个人简介 | Lei Tang's Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-bg: #f9f9f9;
+            --card-bg: #ffffff;
+            --text-color: #333;
+            --light-text: #7f8c8d;
+            --highlight-bg: #f8f4e5;
+            --shadow: 0 5px 15px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+        
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Noto Sans SC', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
-            color: #333;
-            max-width: 1000px;
+            color: var(--text-color);
+            max-width: 1100px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #f9f9f9;
+            background-color: var(--light-bg);
+            background-image: radial-gradient(circle at 10% 20%, rgba(52, 152, 219, 0.05) 0%, rgba(52, 152, 219, 0.05) 90%);
         }
+        
         .language-selector {
             text-align: right;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
+        
         .language-btn {
             background: none;
             border: none;
-            color: #3498db;
+            color: var(--primary-color);
             cursor: pointer;
-            padding: 5px 10px;
-            font-size: 14px;
+            padding: 5px 15px;
+            font-size: 16px;
+            transition: var(--transition);
+            border-radius: 20px;
         }
+        
+        .language-btn:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+        
         .language-btn.active {
             font-weight: bold;
-            border-bottom: 2px solid #3498db;
+            background-color: var(--primary-color);
+            color: white;
         }
+        
         .profile-container {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            padding: 30px;
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            padding: 40px;
             margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
         }
+        
+        .profile-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .profile-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-color), #9b59b6);
+        }
+        
         .header {
             display: flex;
             align-items: center;
             margin-bottom: 30px;
             border-bottom: 1px solid #eee;
             padding-bottom: 20px;
+            position: relative;
         }
+        
         .photo {
-            width: 150px;
-            height: 150px;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
             object-fit: cover;
             border: 5px solid #f0f0f0;
             margin-right: 30px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            transition: var(--transition);
         }
+        
+        .photo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
         .name {
-            font-size: 32px;
+            font-size: 36px;
             font-weight: bold;
-            color: #2c3e50;
+            color: var(--secondary-color);
             margin-bottom: 5px;
-        }
-        .education {
-            font-size: 18px;
-            color: #7f8c8d;
-            margin-bottom: 10px;
-        }
-        .section {
-            margin-bottom: 25px;
-        }
-        .section-title {
-            font-size: 22px;
-            color: #3498db;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 5px;
-            margin-bottom: 15px;
+            position: relative;
             display: inline-block;
         }
-        .interest-item, .award-item, .project-item {
-            margin-bottom: 15px;
-            padding-left: 20px;
+        
+        .name::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .education {
+            font-size: 18px;
+            color: var(--light-text);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .education i {
+            margin-right: 8px;
+            color: var(--primary-color);
+        }
+        
+        .section {
+            margin-bottom: 30px;
             position: relative;
         }
+        
+        .section-title {
+            font-size: 24px;
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            display: inline-block;
+            position: relative;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+        }
+        
+        .interest-item, .award-item, .project-item {
+            margin-bottom: 18px;
+            padding-left: 25px;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .interest-item:hover, .award-item:hover, .project-item:hover {
+            transform: translateX(5px);
+        }
+        
         .interest-item:before, .award-item:before, .project-item:before {
-            content: "•";
-            color: #3498db;
+            content: "▹";
+            color: var(--primary-color);
             font-weight: bold;
             position: absolute;
             left: 0;
+            font-size: 20px;
         }
+        
         .highlight {
-            background-color: #f8f4e5;
-            padding: 2px 5px;
-            border-radius: 3px;
+            background-color: var(--highlight-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+            color: var(--secondary-color);
+            transition: var(--transition);
         }
+        
+        .highlight:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
         .footer {
             text-align: center;
-            margin-top: 30px;
-            color: #95a5a6;
-            font-size: 14px;
+            margin-top: 40px;
+            color: var(--light-text);
+            font-size: 16px;
+            font-style: italic;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
         }
+        
         .english-version {
             display: none;
+        }
+        
+        /* 新增的游戏和互动元素 */
+        .game-container {
+            background-color: #f0f8ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+            border: 1px dashed var(--primary-color);
+        }
+        
+        .game-title {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .game-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: var(--transition);
+            margin: 5px;
+        }
+        
+        .game-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .game-output {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: white;
+            border-radius: 5px;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        
+        /* 项目卡片样式 */
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        .project-title {
+            font-weight: bold;
+            font-size: 18px;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .project-title i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+        
+        .project-desc {
+            color: var(--text-color);
+            margin-bottom: 10px;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        
+        .project-tag {
+            background-color: #e0f2fe;
+            color: #0369a1;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animated {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .photo {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            
+            .name::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .profile-container {
+                padding: 25px;
+            }
         }
     </style>
 </head>
@@ -109,75 +349,169 @@
     </div>
 
     <div id="chinese-version" class="profile-container">
-        <div class="header">
+        <div class="header animated">
             <img src="lei.jpg" alt="汤磊" class="photo">
             <div>
                 <div class="name">汤磊</div>
-                <div class="education">上海电力大学 计算机科学与技术学院 2022级软件工程系</div>
-                <div class="education">数学系辅修 | 电子信息工程系辅修</div>
+                <div class="education"><i class="fas fa-user-tie"></i>IEEE（国际电气电子工程师学会）CS学生会员</div>
+                <div class="education"><i class="fas fa-graduation-cap"></i>MAJOR 2022级软件工程专业</div>
+                <div class="education"><i class="fas fa-book"></i>MINOR 数学系（计算科学方向） | 电子信息工程系</div>
             </div>
         </div>
 
-        <div class="section">
-            <div class="section-title">学术兴趣</div>
+        <div class="section animated delay-1">
+            <div class="section-title"><i class="fas fa-lightbulb"></i>学术兴趣</div>
             <div class="interest-item">计算机系统领域，特别是<span class="highlight">嵌入式系统开发</span>、<span class="highlight">软件可靠性工程</span>和<span class="highlight">形式化验证</span></div>
             <div class="interest-item">跨学科研究，结合计算机科学与数学、电子工程的多领域知识</div>
         </div>
 
-<!--         <div class="section">
-            <div class="section-title">获奖经历</div>
-            <div class="award-item">全国大学生数学竞赛 <span class="highlight">二等奖</span>（前5%）</div>
-            <div class="award-item">挑战杯大学生创新大赛<span class="highlight"></span>（全国前20%）</div>
-        </div> -->
-
-        <div class="section">
-            <div class="section-title">项目经验</div>
-            <div class="project-item">自研指令集框架Lei Arch<span class="highlight">模拟器实现</span></div>
-            <div class="project-item">参与2025年全国大学生系统能力大赛<span class="highlight">技术支持</span></div>
-            <div class="project-item">为我校经济与管理学院开发微信小程序<span class="highlight">"挡雨"</span>，从需求分析到部署上线的完整开发流程</div>
-            <div class="project-item">从零开始设计开发基于<span class="highlight">RISC-V架构</span>的操作系统，实现核心功能模块</div>
-            <div class="project-item">为麻省理工学院的<span class="highlight">XV6系统</span>的boot设计<span class="highlight">容错机制</span>，提高系统可靠性</div>
+        <div class="section animated delay-2">
+            <div class="section-title"><i class="fas fa-project-diagram"></i>项目经验</div>
+            
+            <div class="project-card animated delay-3">
+                <div class="project-title"><i class="fas fa-microchip"></i>自研指令集框架Lei Arch模拟器实现</div>
+                <div class="project-desc">设计并实现了一个自定义指令集架构的模拟器，支持基本的指令执行和调试功能，为后续硬件实现提供了验证平台。</div>
+                <div class="project-tags">
+                    <span class="project-tag">计算机体系结构</span>
+                    <span class="project-tag">模拟器开发</span>
+                    <span class="project-tag">C++</span>
+                </div>
+            </div>
+            
+            <div class="project-card animated delay-3">
+                <div class="project-title"><i class="fas fa-tools"></i>2025年全国大学生系统能力大赛技术支持</div>
+                <div class="project-desc">作为技术团队成员，负责比赛平台的维护和参赛队伍的指导工作，解决各类技术问题，确保比赛顺利进行。</div>
+                <div class="project-tags">
+                    <span class="project-tag">比赛支持</span>
+                    <span class="project-tag">系统调试</span>
+                    <span class="project-tag">团队协作</span>
+                </div>
+            </div>
+            
+            <div class="project-card animated delay-4">
+                <div class="project-title"><i class="fab fa-weixin"></i>微信小程序"挡雨"开发</div>
+                <div class="project-desc">为经济与管理学院开发的全流程项目，从需求分析到部署上线，实现了校园活动预约和资源共享功能。</div>
+                <div class="project-tags">
+                    <span class="project-tag">微信小程序</span>
+                    <span class="project-tag">全栈开发</span>
+                    <span class="project-tag">JavaScript</span>
+                </div>
+            </div>
+            
+            <div class="project-card animated delay-4">
+                <div class="project-title"><i class="fas fa-laptop-code"></i>RISC-V架构操作系统开发</div>
+                <div class="project-desc">从零开始设计开发基于RISC-V架构的操作系统，实现了进程管理、内存管理和基本设备驱动等核心功能模块。</div>
+                <div class="project-tags">
+                    <span class="project-tag">操作系统</span>
+                    <span class="project-tag">RISC-V</span>
+                    <span class="project-tag">C语言</span>
+                </div>
+            </div>
+            
+            <div class="project-card animated delay-5">
+                <div class="project-title"><i class="fas fa-shield-alt"></i>XV6系统容错机制设计</div>
+                <div class="project-desc">为麻省理工学院的XV6系统的boot过程设计容错机制，通过冗余校验和恢复策略提高了系统启动的可靠性。</div>
+                <div class="project-tags">
+                    <span class="project-tag">系统可靠性</span>
+                    <span class="project-tag">容错设计</span>
+                    <span class="project-tag">XV6</span>
+                </div>
+            </div>
         </div>
 
-        <div class="footer">
-            "求知若饥，虚心若愚" —— 持续探索计算机系统的无限可能
+        <div class="game-container animated delay-5">
+            <div class="game-title">小游戏：猜猜我的研究方向</div>
+            <p>点击按钮，看看我可能从事的计算机系统研究领域</p>
+            <button class="game-btn" onclick="showRandomInterest()">猜一猜</button>
+            <div class="game-output" id="interest-output"></div>
+        </div>
+
+        <div class="footer animated delay-5">
+            "求知若饥，虚心若愚" —— 持续探索计算机系统的无限可能。
         </div>
     </div>
 
     <div id="english-version" class="profile-container english-version">
-        <div class="header">
+        <div class="header animated">
             <img src="lei.jpg" alt="Tang Lei" class="photo">
             <div>
                 <div class="name">Lei Tang</div>
-                <div class="education">Shanghai University of Electric Power, School of Computer Science and Technology</div>
-                <div class="education">Class of 2022, Software Engineering Major</div>
-                <div class="education">Minor in Mathematics | Minor in Electronic Information Engineering</div>
+                <div class="education"><i class="fas fa-user-tie"></i>IEEE member of Computer Society</div>
+                <div class="education"><i class="fas fa-graduation-cap"></i>Shanghai University of Electric Power, School of Computer Science and Technology</div>
+                <div class="education"><i class="fas fa-book"></i>Class of 2022, Software Engineering Major</div>
+                <div class="education"><i class="fas fa-book-open"></i>Minor in Mathematics | Minor in Electronic Information Engineering</div>
             </div>
         </div>
 
-        <div class="section">
-            <div class="section-title">Research Interests</div>
+        <div class="section animated delay-1">
+            <div class="section-title"><i class="fas fa-lightbulb"></i>Research Interests</div>
             <div class="interest-item">Computer systems, particularly in <span class="highlight">embedded systems development</span>, <span class="highlight">software reliability engineering</span>, and <span class="highlight">formal verification</span></div>
             <div class="interest-item">Interdisciplinary research combining computer science with mathematics and electronic engineering</div>
         </div>
 
-<!--         <div class="section">
-            <div class="section-title">Awards</div>
-            <div class="award-item">National College Mathematics Competition <span class="highlight">Second Prize</span> (Top 5%)</div>
-            <div class="award-item">National College System Capability Competition <span class="highlight">Excellence Award</span> (Top 20% nationwide)</div>
-        </div> -->
+        <div class="section animated delay-2">
+            <div class="section-title"><i class="fas fa-project-diagram"></i>Project Experience</div>
+            
+            <div class="project-card animated delay-3">
+                <div class="project-title"><i class="fas fa-microchip"></i>Lei Arch Instruction Set Simulator</div>
+                <div class="project-desc">Designed and implemented a simulator for self-designed instruction set architecture, providing a verification platform for subsequent hardware implementation.</div>
+                <div class="project-tags">
+                    <span class="project-tag">Computer Architecture</span>
+                    <span class="project-tag">Simulator</span>
+                    <span class="project-tag">C++</span>
+                </div>
+            </div>
+            
+            <div class="project-card animated delay-3">
+                <div class="project-title"><i class="fas fa-tools"></i>Technical Support for 2025 National College System Capability Competition</div>
+                <div class="project-desc">As a technical team member, responsible for platform maintenance and participant guidance, solving various technical issues to ensure smooth competition.</div>
+                <div class="project-tags">
+                    <span class="project-tag">Competition Support</span>
+                    <span class="project-tag">System Debugging</span>
+                    <span class="project-tag">Teamwork</span>
+                </div>
+            </div>
+            
+            <div class="project-card animated delay-4">
+                <div class="project-title"><i class="fab fa-weixin"></i>WeChat Mini-Program "Rain Shield"</div>
+                <div class="project-desc">Full-cycle development project for School of Economics and Management, implementing campus activity booking and resource sharing features.</div>
+                <div class="project-tags">
+                    <span class="project-tag">WeChat Mini-Program</span>
+                    <span class="project-tag">Full-stack</span>
+                    <span class="project-tag">JavaScript</span>
+                </div>
+            </div>
+            
+            <div class="project-card animated delay-4">
+                <div class="project-title"><i class="fas fa-laptop-code"></i>RISC-V-based OS Development</div>
+                <div class="project-desc">Designed and implemented a RISC-V-based operating system from scratch, including core modules like process management, memory management and basic device drivers.</div>
+                <div class="project-tags">
+                    <span class="project-tag">Operating System</span>
+                    <span class="project-tag">RISC-V</span>
+                    <span class="project-tag">C Programming</span>
+                </div>
+            </div>
+            
+            <div class="project-card animated delay-5">
+                <div class="project-title"><i class="fas fa-shield-alt"></i>Fault-tolerant Mechanism for XV6 System</div>
+                <div class="project-desc">Designed fault-tolerant mechanism for boot process of MIT's XV6 system, improving startup reliability through redundancy checks and recovery strategies.</div>
+                <div class="project-tags">
+                    <span class="project-tag">System Reliability</span>
+                    <span class="project-tag">Fault Tolerance</span>
+                    <span class="project-tag">XV6</span>
+                </div>
+            </div>
+        </div>
 
-<div class="section">
-    <div class="section-title">Project Experience</div>
-    <div class="project-item">Implemented <span class="highlight">simulator</span> for self-designed instruction set architecture <span class="highlight">Lei Arch</span></div>
-    <div class="project-item">Provided <span class="highlight">technical support</span> for 2025 National College System Capability Competition</div>
-    <div class="project-item">Developed WeChat mini-program <span class="highlight">"Rain Shield"</span> for School of Economics and Management, covering full development cycle from requirements analysis to deployment</div>
-    <div class="project-item">Designed and implemented a <span class="highlight">RISC-V-based</span> operating system from scratch with core functional modules</div>
-    <div class="project-item">Designed <span class="highlight">fault-tolerant mechanism</span> for boot process of MIT's <span class="highlight">XV6 system</span>, enhancing system reliability</div>
-</div>
+        <div class="game-container animated delay-5">
+            <div class="game-title">Mini Game: Guess My Research Area</div>
+            <p>Click the button to see possible computer systems research areas I might work on</p>
+            <button class="game-btn" onclick="showRandomInterestEng()">Take a Guess</button>
+            <div class="game-output" id="interest-output-eng"></div>
+        </div>
 
-        <div class="footer">
-            "Stay hungry, stay foolish" — Continuously exploring the possibilities of computer systems
+        <div class="footer animated delay-5">
+            "Stay hungry, stay foolish" — Continuously exploring the possibilities of computer systems.
         </div>
     </div>
 
@@ -195,6 +529,59 @@
             document.querySelectorAll('.language-btn')[0].classList.remove('active');
             document.querySelectorAll('.language-btn')[1].classList.add('active');
         }
+        
+        // 新增的互动游戏功能
+        const researchInterests = [
+            "嵌入式系统开发 - 让硬件与软件完美配合",
+            "形式化验证 - 用数学证明程序的正确性",
+            "操作系统内核开发 - 探索计算机系统的核心",
+            "编译器优化 - 让程序跑得更快",
+            "分布式系统 - 构建可扩展的软件架构",
+            "计算机体系结构 - 设计下一代处理器",
+            "软件可靠性工程 - 打造永不崩溃的系统"
+        ];
+        
+        const researchInterestsEng = [
+            "Embedded Systems - Making hardware and software work perfectly together",
+            "Formal Verification - Proving program correctness with mathematics",
+            "OS Kernel Development - Exploring the heart of computer systems",
+            "Compiler Optimization - Making programs run faster",
+            "Distributed Systems - Building scalable software architectures",
+            "Computer Architecture - Designing next-generation processors",
+            "Software Reliability Engineering - Building crash-proof systems"
+        ];
+        
+        function showRandomInterest() {
+            const output = document.getElementById('interest-output');
+            const randomIndex = Math.floor(Math.random() * researchInterests.length);
+            output.innerHTML = `<strong>${researchInterests[randomIndex]}</strong>`;
+            output.style.animation = 'none';
+            void output.offsetWidth; // 触发重绘
+            output.style.animation = 'fadeIn 0.5s ease';
+        }
+        
+        function showRandomInterestEng() {
+            const output = document.getElementById('interest-output-eng');
+            const randomIndex = Math.floor(Math.random() * researchInterestsEng.length);
+            output.innerHTML = `<strong>${researchInterestsEng[randomIndex]}</strong>`;
+            output.style.animation = 'none';
+            void output.offsetWidth; // 触发重绘
+            output.style.animation = 'fadeIn 0.5s ease';
+        }
+        
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.animated');
+            elements.forEach(el => {
+                el.style.opacity = '0';
+            });
+            
+            setTimeout(() => {
+                elements.forEach(el => {
+                    el.style.opacity = '1';
+                });
+            }, 100);
+        });
     </script>
 </body>
 </html>
