@@ -8,27 +8,46 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #3498db;
-            --secondary-color: #2c3e50;
-            --accent-color: #e74c3c;
-            --light-bg: #f9f9f9;
-            --card-bg: #ffffff;
-            --text-color: #333;
-            --light-text: #7f8c8d;
-            --highlight-bg: #f8f4e5;
-            --shadow: 0 5px 15px rgba(0,0,0,0.1);
+            --primary-color: #00ff41; /* 矩阵绿 */
+            --secondary-color: #00cc33;
+            --accent-color: #ff003c;
+            --dark-bg: #0a0a0a;
+            --card-bg: #111111;
+            --text-color: #00ff41;
+            --light-text: #00cc33;
+            --highlight-bg: rgba(0, 255, 65, 0.1);
+            --shadow: 0 0 10px rgba(0, 255, 65, 0.3);
             --transition: all 0.3s ease;
+            --glow: 0 0 5px #00ff41, 0 0 10px #00ff41;
         }
         
         body {
-            font-family: 'Noto Sans SC', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Courier New', monospace;
             line-height: 1.6;
             color: var(--text-color);
             max-width: 1100px;
             margin: 0 auto;
             padding: 20px;
-            background-color: var(--light-bg);
-            background-image: radial-gradient(circle at 10% 20%, rgba(52, 152, 219, 0.05) 0%, rgba(52, 152, 219, 0.05) 90%);
+            background-color: var(--dark-bg);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 255, 65, 0.05) 0%, rgba(0, 255, 65, 0.05) 90%),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(10, 10, 10, 0.9));
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* 矩阵雨效果 */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(transparent 80%, rgba(0, 255, 65, 0.1) 100%);
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.3;
         }
         
         .language-selector {
@@ -38,39 +57,44 @@
         
         .language-btn {
             background: none;
-            border: none;
+            border: 1px solid var(--primary-color);
             color: var(--primary-color);
             cursor: pointer;
             padding: 5px 15px;
             font-size: 16px;
             transition: var(--transition);
-            border-radius: 20px;
+            border-radius: 0;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .language-btn:hover {
-            background-color: rgba(52, 152, 219, 0.1);
+            background-color: rgba(0, 255, 65, 0.1);
+            box-shadow: var(--glow);
         }
         
         .language-btn.active {
             font-weight: bold;
             background-color: var(--primary-color);
-            color: white;
+            color: black;
         }
         
         .profile-container {
             background-color: var(--card-bg);
-            border-radius: 15px;
+            border-radius: 0;
             box-shadow: var(--shadow);
             padding: 40px;
             margin-top: 10px;
             position: relative;
             overflow: hidden;
             transition: var(--transition);
+            border: 1px solid var(--primary-color);
         }
         
         .profile-container:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
         }
         
         .profile-container::before {
@@ -80,14 +104,14 @@
             left: 0;
             width: 5px;
             height: 100%;
-            background: linear-gradient(to bottom, var(--primary-color), #9b59b6);
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
         }
         
         .header {
             display: flex;
             align-items: center;
             margin-bottom: 30px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--primary-color);
             padding-bottom: 20px;
             position: relative;
         }
@@ -95,26 +119,28 @@
         .photo {
             width: 260px;
             height: 260px;
-            /* 移除这行 border-radius: 50%; */
             object-fit: cover;
-            border: 5px solid #f0f0f0;
+            border: 5px solid var(--primary-color);
             margin-right: 30px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            box-shadow: var(--glow);
             transition: var(--transition);
+            filter: sepia(1) hue-rotate(80deg) saturate(3);
         }
         
         .photo:hover {
             transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.7);
         }
         
         .name {
             font-size: 36px;
             font-weight: bold;
-            color: var(--secondary-color);
+            color: var(--primary-color);
             margin-bottom: 5px;
             position: relative;
             display: inline-block;
+            text-shadow: var(--glow);
+            letter-spacing: 2px;
         }
         
         .name::after {
@@ -125,6 +151,7 @@
             width: 50px;
             height: 3px;
             background-color: var(--primary-color);
+            box-shadow: var(--glow);
         }
         
         .education {
@@ -147,12 +174,14 @@
         
         .section-title {
             font-size: 24px;
-            color: var(--secondary-color);
+            color: var(--primary-color);
             border-bottom: 2px solid var(--primary-color);
             padding-bottom: 8px;
             margin-bottom: 20px;
             display: inline-block;
             position: relative;
+            text-shadow: var(--glow);
+            letter-spacing: 1px;
         }
         
         .section-title i {
@@ -168,29 +197,33 @@
         
         .interest-item:hover, .award-item:hover, .project-item:hover {
             transform: translateX(5px);
+            text-shadow: var(--glow);
         }
         
         .interest-item:before, .award-item:before, .project-item:before {
-            content: "▹";
+            content: ">";
             color: var(--primary-color);
             font-weight: bold;
             position: absolute;
             left: 0;
             font-size: 20px;
+            text-shadow: var(--glow);
         }
         
         .highlight {
             background-color: var(--highlight-bg);
             padding: 2px 8px;
-            border-radius: 4px;
+            border-radius: 0;
             font-weight: 500;
-            color: var(--secondary-color);
+            color: var(--primary-color);
             transition: var(--transition);
+            border: 1px solid transparent;
         }
         
         .highlight:hover {
-            background-color: var(--primary-color);
-            color: white;
+            background-color: rgba(0, 255, 65, 0.2);
+            border: 1px solid var(--primary-color);
+            box-shadow: var(--glow);
         }
         
         .footer {
@@ -200,7 +233,8 @@
             font-size: 16px;
             font-style: italic;
             padding-top: 20px;
-            border-top: 1px solid #eee;
+            border-top: 1px solid var(--primary-color);
+            text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
         }
         
         .english-version {
@@ -209,72 +243,83 @@
         
         /* 新增的游戏和互动元素 */
         .game-container {
-            background-color: #f0f8ff;
-            border-radius: 10px;
+            background-color: rgba(0, 20, 0, 0.5);
+            border-radius: 0;
             padding: 20px;
             margin: 30px 0;
             text-align: center;
             border: 1px dashed var(--primary-color);
+            box-shadow: inset 0 0 10px rgba(0, 255, 65, 0.2);
         }
         
         .game-title {
             color: var(--primary-color);
             margin-bottom: 15px;
             font-weight: bold;
+            text-shadow: var(--glow);
         }
         
         .game-btn {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
             padding: 10px 20px;
-            border-radius: 30px;
+            border-radius: 0;
             cursor: pointer;
             font-size: 16px;
             transition: var(--transition);
             margin: 5px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .game-btn:hover {
-            background-color: #2980b9;
+            background-color: rgba(0, 255, 65, 0.1);
+            box-shadow: var(--glow);
             transform: translateY(-2px);
         }
         
         .game-output {
             margin-top: 15px;
             padding: 10px;
-            background-color: white;
-            border-radius: 5px;
+            background-color: rgba(0, 10, 0, 0.7);
+            border-radius: 0;
             min-height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 18px;
+            border: 1px solid var(--primary-color);
+            text-shadow: var(--glow);
         }
         
         /* 项目卡片样式 */
         .project-card {
-            background: white;
-            border-radius: 10px;
+            background: rgba(10, 20, 10, 0.5);
+            border-radius: 0;
             padding: 20px;
             margin-bottom: 20px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.1);
             border-left: 4px solid var(--primary-color);
             transition: var(--transition);
+            border: 1px solid transparent;
         }
         
         .project-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+            border: 1px solid var(--primary-color);
         }
         
         .project-title {
             font-weight: bold;
             font-size: 18px;
-            color: var(--secondary-color);
+            color: var(--primary-color);
             margin-bottom: 10px;
             display: flex;
             align-items: center;
+            text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
         }
         
         .project-title i {
@@ -294,19 +339,25 @@
         }
         
         .project-tag {
-            background-color: #e0f2fe;
-            color: #0369a1;
+            background-color: rgba(0, 255, 65, 0.1);
+            color: var(--primary-color);
             padding: 4px 12px;
-            border-radius: 20px;
+            border-radius: 0;
             font-size: 12px;
             margin-right: 8px;
             margin-bottom: 8px;
+            border: 1px solid var(--primary-color);
         }
         
         /* 动画效果 */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
         }
         
         .animated {
@@ -318,6 +369,41 @@
         .delay-3 { animation-delay: 0.3s; }
         .delay-4 { animation-delay: 0.4s; }
         .delay-5 { animation-delay: 0.5s; }
+        
+        .flicker {
+            animation: flicker 2s infinite;
+        }
+        
+        /* 终端样式 */
+        .terminal {
+            background-color: rgba(0, 10, 0, 0.8);
+            border: 1px solid var(--primary-color);
+            padding: 15px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            color: var(--primary-color);
+            box-shadow: inset 0 0 10px rgba(0, 255, 65, 0.2);
+        }
+        
+        .terminal-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--primary-color);
+            padding-bottom: 5px;
+        }
+        
+        .terminal-title {
+            font-weight: bold;
+        }
+        
+        .terminal-content {
+            min-height: 100px;
+        }
+        
+        .command {
+            color: var(--secondary-color);
+        }
         
         /* 响应式设计 */
         @media (max-width: 768px) {
@@ -362,6 +448,7 @@
         <div class="section animated delay-1">
             <div class="section-title"><i class="fas fa-lightbulb"></i>学术兴趣</div>
             <div class="interest-item">计算机系统领域，特别是<span class="highlight">嵌入式系统开发</span>、<span class="highlight">软件可靠性工程</span>和<span class="highlight">形式化验证</span></div>
+            <div class="interest-item">网络安全领域，专注于<span class="highlight">PWN</span>和<span class="highlight">二进制分析</span>技术</div>
             <div class="interest-item">跨学科研究，结合计算机科学与数学、电子工程的多领域知识</div>
         </div>
 
@@ -419,6 +506,25 @@
             </div>
         </div>
 
+        <div class="terminal animated delay-5">
+            <div class="terminal-header">
+                <div class="terminal-title">安全研究终端</div>
+                <div class="terminal-controls">
+                    <i class="fas fa-minus"></i>
+                    <i class="fas fa-square"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="terminal-content">
+                <div class="command">user@system:~$ whoami</div>
+                <div>汤磊 - 安全研究员 & 系统开发者</div>
+                <div class="command">user@system:~$ skills --security</div>
+                <div>PWN | 二进制分析 | 逆向工程 | 漏洞挖掘</div>
+                <div class="command">user@system:~$ cat interests.txt</div>
+                <div>嵌入式系统 | 形式化验证 | 操作系统 | 计算机体系结构</div>
+            </div>
+        </div>
+
         <div class="game-container animated delay-5">
             <div class="game-title">小游戏：猜猜我的研究方向</div>
             <p>点击按钮，看看我可能从事的计算机系统研究领域（可以连续点击哦~）</p>
@@ -446,6 +552,7 @@
         <div class="section animated delay-1">
             <div class="section-title"><i class="fas fa-lightbulb"></i>Research Interests</div>
             <div class="interest-item">Computer systems, particularly in <span class="highlight">embedded systems development</span>, <span class="highlight">software reliability engineering</span>, and <span class="highlight">formal verification</span></div>
+            <div class="interest-item">Cybersecurity, focusing on <span class="highlight">PWN</span> and <span class="highlight">binary analysis</span> techniques</div>
             <div class="interest-item">Interdisciplinary research combining computer science with mathematics and electronic engineering</div>
         </div>
 
@@ -503,6 +610,25 @@
             </div>
         </div>
 
+        <div class="terminal animated delay-5">
+            <div class="terminal-header">
+                <div class="terminal-title">Security Research Terminal</div>
+                <div class="terminal-controls">
+                    <i class="fas fa-minus"></i>
+                    <i class="fas fa-square"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="terminal-content">
+                <div class="command">user@system:~$ whoami</div>
+                <div>Lei Tang - Security Researcher & System Developer</div>
+                <div class="command">user@system:~$ skills --security</div>
+                <div>PWN | Binary Analysis | Reverse Engineering | Vulnerability Research</div>
+                <div class="command">user@system:~$ cat interests.txt</div>
+                <div>Embedded Systems | Formal Verification | Operating Systems | Computer Architecture</div>
+            </div>
+        </div>
+
         <div class="game-container animated delay-5">
             <div class="game-title">Mini Game: Guess My Research Area</div>
             <p>Click the button to see possible computer systems research areas I might work on</p>
@@ -536,7 +662,9 @@
             "形式化验证 - 用数学证明程序的正确性",
             "操作系统内核开发 - 探索计算机系统的核心",
             "计算机体系结构 - 设计下一代处理器",
-            "软件可靠性工程 - 打造永不崩溃的系统"
+            "软件可靠性工程 - 打造永不崩溃的系统",
+            "PWN技术 - 探索软件漏洞与利用",
+            "二进制分析 - 深入理解程序本质"
         ];
         
         const researchInterestsEng = [
@@ -544,7 +672,9 @@
             "Formal Verification - Proving program correctness with mathematics",
             "OS Kernel Development - Exploring the heart of computer systems",
             "Computer Architecture - Designing next-generation processors",
-            "Software Reliability Engineering - Building crash-proof systems"
+            "Software Reliability Engineering - Building crash-proof systems",
+            "PWN Techniques - Exploring software vulnerabilities and exploits",
+            "Binary Analysis - Deep understanding of program essence"
         ];
         
         function showRandomInterest() {
@@ -577,6 +707,12 @@
                     el.style.opacity = '1';
                 });
             }, 100);
+            
+            // 添加闪烁效果
+            const flickerElements = document.querySelectorAll('.name, .section-title');
+            flickerElements.forEach(el => {
+                el.classList.add('flicker');
+            });
         });
     </script>
 </body>
