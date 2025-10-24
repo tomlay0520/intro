@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>汤磊的个人简介 | Lei Tang's Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -13,8 +13,8 @@
             --accent-color: #ff003c;
             --dark-bg: #0a0a0a;
             --card-bg: #111111;
-            --text-color: #00ff41;
-            --light-text: #00cc33;
+            --text-color: #ffffff;
+            --light-text: #cccccc;
             --highlight-bg: rgba(0, 255, 65, 0.1);
             --shadow: 0 0 10px rgba(0, 255, 65, 0.3);
             --transition: all 0.3s ease;
@@ -22,7 +22,7 @@
         }
         
         body {
-            font-family: 'Courier New', monospace;
+            font-family: 'Share Tech Mono', monospace;
             line-height: 1.6;
             color: var(--text-color);
             max-width: 1100px;
@@ -37,14 +37,12 @@
         }
         
         /* 矩阵雨效果 */
-        body::before {
-            content: "";
+        #matrix-rain {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(transparent 80%, rgba(0, 255, 65, 0.1) 100%);
             pointer-events: none;
             z-index: -1;
             opacity: 0.3;
@@ -64,7 +62,7 @@
             font-size: 16px;
             transition: var(--transition);
             border-radius: 0;
-            font-family: 'Courier New', monospace;
+            font-family: 'Share Tech Mono', monospace;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -120,16 +118,16 @@
             width: 260px;
             height: 260px;
             object-fit: cover;
-            border: 5px solid var(--primary-color);
+            border: 5px solid var(--text-color);
             margin-right: 30px;
-            box-shadow: var(--glow);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.5);
             transition: var(--transition);
-            filter: sepia(1) hue-rotate(80deg) saturate(3);
+            filter: grayscale(30%) contrast(120%);
         }
         
         .photo:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.7);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.7);
         }
         
         .name {
@@ -193,11 +191,11 @@
             padding-left: 25px;
             position: relative;
             transition: var(--transition);
+            color: var(--text-color);
         }
         
         .interest-item:hover, .award-item:hover, .project-item:hover {
             transform: translateX(5px);
-            text-shadow: var(--glow);
         }
         
         .interest-item:before, .award-item:before, .project-item:before {
@@ -234,64 +232,97 @@
             font-style: italic;
             padding-top: 20px;
             border-top: 1px solid var(--primary-color);
-            text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
         }
         
         .english-version {
             display: none;
         }
         
-        /* 新增的游戏和互动元素 */
-        .game-container {
-            background-color: rgba(0, 20, 0, 0.5);
+        /* 虚拟终端样式 */
+        .terminal-container {
+            background-color: rgba(0, 10, 0, 0.8);
             border-radius: 0;
-            padding: 20px;
+            padding: 0;
             margin: 30px 0;
-            text-align: center;
-            border: 1px dashed var(--primary-color);
+            text-align: left;
+            border: 1px solid var(--primary-color);
             box-shadow: inset 0 0 10px rgba(0, 255, 65, 0.2);
+            overflow: hidden;
         }
         
-        .game-title {
+        .terminal-header {
+            background-color: rgba(0, 20, 0, 0.9);
+            padding: 10px 15px;
+            border-bottom: 1px solid var(--primary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .terminal-title {
             color: var(--primary-color);
-            margin-bottom: 15px;
             font-weight: bold;
             text-shadow: var(--glow);
         }
         
-        .game-btn {
-            background-color: transparent;
-            color: var(--primary-color);
-            border: 1px solid var(--primary-color);
-            padding: 10px 20px;
-            border-radius: 0;
-            cursor: pointer;
-            font-size: 16px;
-            transition: var(--transition);
-            margin: 5px;
-            font-family: 'Courier New', monospace;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .game-btn:hover {
-            background-color: rgba(0, 255, 65, 0.1);
-            box-shadow: var(--glow);
-            transform: translateY(-2px);
-        }
-        
-        .game-output {
-            margin-top: 15px;
-            padding: 10px;
-            background-color: rgba(0, 10, 0, 0.7);
-            border-radius: 0;
-            min-height: 50px;
+        .terminal-controls {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            border: 1px solid var(--primary-color);
-            text-shadow: var(--glow);
+            gap: 10px;
+        }
+        
+        .terminal-controls i {
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .terminal-controls i:hover {
+            color: var(--accent-color);
+        }
+        
+        .terminal-content {
+            padding: 15px;
+            min-height: 200px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: 'Share Tech Mono', monospace;
+        }
+        
+        .terminal-line {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .terminal-prompt {
+            color: var(--primary-color);
+            margin-right: 10px;
+            white-space: nowrap;
+        }
+        
+        .terminal-input {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 16px;
+            width: 100%;
+            outline: none;
+            caret-color: var(--primary-color);
+        }
+        
+        .terminal-output {
+            color: var(--text-color);
+            margin-top: 5px;
+            white-space: pre-wrap;
+        }
+        
+        .command {
+            color: var(--primary-color);
+        }
+        
+        .error {
+            color: var(--accent-color);
         }
         
         /* 项目卡片样式 */
@@ -360,6 +391,11 @@
             50% { opacity: 0.8; }
         }
         
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
         .animated {
             animation: fadeIn 0.6s ease forwards;
         }
@@ -374,35 +410,8 @@
             animation: flicker 2s infinite;
         }
         
-        /* 终端样式 */
-        .terminal {
-            background-color: rgba(0, 10, 0, 0.8);
-            border: 1px solid var(--primary-color);
-            padding: 15px;
-            margin: 20px 0;
-            font-family: 'Courier New', monospace;
-            color: var(--primary-color);
-            box-shadow: inset 0 0 10px rgba(0, 255, 65, 0.2);
-        }
-        
-        .terminal-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            border-bottom: 1px solid var(--primary-color);
-            padding-bottom: 5px;
-        }
-        
-        .terminal-title {
-            font-weight: bold;
-        }
-        
-        .terminal-content {
-            min-height: 100px;
-        }
-        
-        .command {
-            color: var(--secondary-color);
+        .blink {
+            animation: blink 1s infinite;
         }
         
         /* 响应式设计 */
@@ -429,6 +438,8 @@
     </style>
 </head>
 <body>
+    <canvas id="matrix-rain"></canvas>
+    
     <div class="language-selector">
         <button class="language-btn active" onclick="showChinese()">中文</button>
         <button class="language-btn" onclick="showEnglish()">English</button>
@@ -506,7 +517,7 @@
             </div>
         </div>
 
-        <div class="terminal animated delay-5">
+        <div class="terminal-container animated delay-5">
             <div class="terminal-header">
                 <div class="terminal-title">安全研究终端</div>
                 <div class="terminal-controls">
@@ -515,21 +526,16 @@
                     <i class="fas fa-times"></i>
                 </div>
             </div>
-            <div class="terminal-content">
-                <div class="command">user@system:~$ whoami</div>
-                <div>汤磊 - 安全研究员 & 系统开发者</div>
-                <div class="command">user@system:~$ skills --security</div>
-                <div>PWN | 二进制分析 | 逆向工程 | 漏洞挖掘</div>
-                <div class="command">user@system:~$ cat interests.txt</div>
-                <div>嵌入式系统 | 形式化验证 | 操作系统 | 计算机体系结构</div>
+            <div class="terminal-content" id="terminal-content">
+                <div class="terminal-output">欢迎访问汤磊的个人终端系统</div>
+                <div class="terminal-output">输入 'help' 查看可用命令</div>
+                <div class="terminal-output">----------------------------------------</div>
+                <div id="terminal-history"></div>
+                <div class="terminal-line">
+                    <span class="terminal-prompt">user@system:~$</span>
+                    <input type="text" class="terminal-input" id="terminal-input" autocomplete="off" autofocus>
+                </div>
             </div>
-        </div>
-
-        <div class="game-container animated delay-5">
-            <div class="game-title">小游戏：猜猜我的研究方向</div>
-            <p>点击按钮，看看我可能从事的计算机系统研究领域（可以连续点击哦~）</p>
-            <button class="game-btn" onclick="showRandomInterest()">猜一猜</button>
-            <div class="game-output" id="interest-output"></div>
         </div>
 
         <div class="footer animated delay-5">
@@ -610,7 +616,7 @@
             </div>
         </div>
 
-        <div class="terminal animated delay-5">
+        <div class="terminal-container animated delay-5">
             <div class="terminal-header">
                 <div class="terminal-title">Security Research Terminal</div>
                 <div class="terminal-controls">
@@ -619,21 +625,16 @@
                     <i class="fas fa-times"></i>
                 </div>
             </div>
-            <div class="terminal-content">
-                <div class="command">user@system:~$ whoami</div>
-                <div>Lei Tang - Security Researcher & System Developer</div>
-                <div class="command">user@system:~$ skills --security</div>
-                <div>PWN | Binary Analysis | Reverse Engineering | Vulnerability Research</div>
-                <div class="command">user@system:~$ cat interests.txt</div>
-                <div>Embedded Systems | Formal Verification | Operating Systems | Computer Architecture</div>
+            <div class="terminal-content" id="terminal-content-eng">
+                <div class="terminal-output">Welcome to Lei Tang's Personal Terminal System</div>
+                <div class="terminal-output">Type 'help' to see available commands</div>
+                <div class="terminal-output">----------------------------------------</div>
+                <div id="terminal-history-eng"></div>
+                <div class="terminal-line">
+                    <span class="terminal-prompt">user@system:~$</span>
+                    <input type="text" class="terminal-input" id="terminal-input-eng" autocomplete="off">
+                </div>
             </div>
-        </div>
-
-        <div class="game-container animated delay-5">
-            <div class="game-title">Mini Game: Guess My Research Area</div>
-            <p>Click the button to see possible computer systems research areas I might work on</p>
-            <button class="game-btn" onclick="showRandomInterestEng()">Take a Guess</button>
-            <div class="game-output" id="interest-output-eng"></div>
         </div>
 
         <div class="footer animated delay-5">
@@ -642,11 +643,13 @@
     </div>
 
     <script>
+        // 语言切换功能
         function showChinese() {
             document.getElementById('chinese-version').style.display = 'block';
             document.getElementById('english-version').style.display = 'none';
             document.querySelectorAll('.language-btn')[0].classList.add('active');
             document.querySelectorAll('.language-btn')[1].classList.remove('active');
+            document.getElementById('terminal-input').focus();
         }
 
         function showEnglish() {
@@ -654,59 +657,139 @@
             document.getElementById('english-version').style.display = 'block';
             document.querySelectorAll('.language-btn')[0].classList.remove('active');
             document.querySelectorAll('.language-btn')[1].classList.add('active');
+            document.getElementById('terminal-input-eng').focus();
         }
         
-        // 新增的互动游戏功能
-        const researchInterests = [
-            "嵌入式系统开发 - 让硬件与软件完美配合",
-            "形式化验证 - 用数学证明程序的正确性",
-            "操作系统内核开发 - 探索计算机系统的核心",
-            "计算机体系结构 - 设计下一代处理器",
-            "软件可靠性工程 - 打造永不崩溃的系统",
-            "PWN技术 - 探索软件漏洞与利用",
-            "二进制分析 - 深入理解程序本质"
-        ];
-        
-        const researchInterestsEng = [
-            "Embedded Systems - Making hardware and software work perfectly together",
-            "Formal Verification - Proving program correctness with mathematics",
-            "OS Kernel Development - Exploring the heart of computer systems",
-            "Computer Architecture - Designing next-generation processors",
-            "Software Reliability Engineering - Building crash-proof systems",
-            "PWN Techniques - Exploring software vulnerabilities and exploits",
-            "Binary Analysis - Deep understanding of program essence"
-        ];
-        
-        function showRandomInterest() {
-            const output = document.getElementById('interest-output');
-            const randomIndex = Math.floor(Math.random() * researchInterests.length);
-            output.innerHTML = `<strong>${researchInterests[randomIndex]}</strong>`;
-            output.style.animation = 'none';
-            void output.offsetWidth; // 触发重绘
-            output.style.animation = 'fadeIn 0.5s ease';
-        }
-        
-        function showRandomInterestEng() {
-            const output = document.getElementById('interest-output-eng');
-            const randomIndex = Math.floor(Math.random() * researchInterestsEng.length);
-            output.innerHTML = `<strong>${researchInterestsEng[randomIndex]}</strong>`;
-            output.style.animation = 'none';
-            void output.offsetWidth; // 触发重绘
-            output.style.animation = 'fadeIn 0.5s ease';
-        }
-        
-        // 页面加载动画
-        document.addEventListener('DOMContentLoaded', function() {
-            const elements = document.querySelectorAll('.animated');
-            elements.forEach(el => {
-                el.style.opacity = '0';
-            });
+        // 矩阵雨效果
+        function initMatrixRain() {
+            const canvas = document.getElementById('matrix-rain');
+            const ctx = canvas.getContext('2d');
             
-            setTimeout(() => {
-                elements.forEach(el => {
-                    el.style.opacity = '1';
-                });
-            }, 100);
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const chars = "01";
+            const charArray = chars.split("");
+            const fontSize = 14;
+            const columns = canvas.width / fontSize;
+            const drops = [];
+            
+            for(let i = 0; i < columns; i++) {
+                drops[i] = 1;
+            }
+            
+            function draw() {
+                ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = "#00ff41";
+                ctx.font = fontSize + "px 'Share Tech Mono'";
+                
+                for(let i = 0; i < drops.length; i++) {
+                    const text = charArray[Math.floor(Math.random() * charArray.length)];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    
+                    if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    
+                    drops[i]++;
+                }
+            }
+            
+            setInterval(draw, 33);
+        }
+        
+        // 虚拟终端功能
+        function initTerminal(terminalId, inputId, historyId, isChinese) {
+            const terminalInput = document.getElementById(inputId);
+            const terminalHistory = document.getElementById(historyId);
+            
+            const commands = {
+                help: {
+                    output: isChinese ? 
+                        "可用命令:\n  whoami - 显示用户信息\n  skills - 显示技能\n  projects - 显示项目\n  contact - 联系信息\n  clear - 清屏" :
+                        "Available commands:\n  whoami - Show user info\n  skills - Show skills\n  projects - Show projects\n  contact - Contact info\n  clear - Clear screen"
+                },
+                whoami: {
+                    output: isChinese ? 
+                        "汤磊 - 安全研究员 & 系统开发者\nIEEE CS学生会员 | 软件工程专业" :
+                        "Lei Tang - Security Researcher & System Developer\nIEEE CS Student Member | Software Engineering Major"
+                },
+                skills: {
+                    output: isChinese ? 
+                        "技术技能:\n  • PWN技术\n  • 二进制分析\n  • 逆向工程\n  • 漏洞挖掘\n  • 嵌入式系统开发\n  • 形式化验证\n  • 操作系统开发" :
+                        "Technical Skills:\n  • PWN Techniques\n  • Binary Analysis\n  • Reverse Engineering\n  • Vulnerability Research\n  • Embedded Systems Development\n  • Formal Verification\n  • OS Development"
+                },
+                projects: {
+                    output: isChinese ? 
+                        "主要项目:\n  • 自研指令集框架Lei Arch模拟器\n  • RISC-V架构操作系统开发\n  • XV6系统容错机制设计\n  • 微信小程序'挡雨'开发" :
+                        "Main Projects:\n  • Lei Arch Instruction Set Simulator\n  • RISC-V-based OS Development\n  • Fault-tolerant Mechanism for XV6\n  • WeChat Mini-Program 'Rain Shield'"
+                },
+                contact: {
+                    output: isChinese ? 
+                        "联系方式:\n  • 邮箱: tang.lei@example.com\n  • GitHub: github.com/tanglei\n  • LinkedIn: linkedin.com/in/tanglei" :
+                        "Contact:\n  • Email: tang.lei@example.com\n  • GitHub: github.com/tanglei\n  • LinkedIn: linkedin.com/in/tanglei"
+                },
+                clear: {
+                    output: "",
+                    isClear: true
+                }
+            };
+            
+            function addOutput(text, isCommand = false) {
+                const outputElement = document.createElement('div');
+                outputElement.className = isCommand ? 'terminal-output command' : 'terminal-output';
+                outputElement.textContent = text;
+                terminalHistory.appendChild(outputElement);
+                
+                // 自动滚动到底部
+                const terminalContent = document.getElementById(terminalId);
+                terminalContent.scrollTop = terminalContent.scrollHeight;
+            }
+            
+            function processCommand(command) {
+                if (commands[command]) {
+                    if (commands[command].isClear) {
+                        terminalHistory.innerHTML = '';
+                    } else {
+                        addOutput(commands[command].output);
+                    }
+                } else {
+                    addOutput(isChinese ? 
+                        `命令未找到: ${command}\n输入 'help' 查看可用命令` :
+                        `Command not found: ${command}\nType 'help' to see available commands`, 
+                        true
+                    );
+                }
+            }
+            
+            terminalInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    const command = terminalInput.value.trim();
+                    
+                    if (command) {
+                        // 显示输入的命令
+                        addOutput(`user@system:~$ ${command}`, true);
+                        
+                        // 处理命令
+                        processCommand(command);
+                        
+                        // 清空输入框
+                        terminalInput.value = '';
+                    }
+                }
+            });
+        }
+        
+        // 页面加载初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化矩阵雨
+            initMatrixRain();
+            
+            // 初始化终端
+            initTerminal('terminal-content', 'terminal-input', 'terminal-history', true);
+            initTerminal('terminal-content-eng', 'terminal-input-eng', 'terminal-history-eng', false);
             
             // 添加闪烁效果
             const flickerElements = document.querySelectorAll('.name, .section-title');
